@@ -44,12 +44,30 @@ def process_directory(directory):
         for kmer in all_kmers:
             row.append(file_content.get(kmer, 0))  # defaults to 0 if the kmer isn't present
         matrix.append(row)
+
+    # remove singletons (only one row has a nonzero value for that kmer)
+    cols_to_remove = []
+    for j in range(len(all_kmers)):
+        nonzero_count = sum(1 for i in range(len(matrix)) if matrix[i][j] > 0)
+        if nonzero_count == 1:
+            cols_to_remove.append(j)
+
+    print(cols_to_remove)
+
+    # remove the singleton columns from the matrix and update all_kmers
+    matrix_filtered = []
+    all_kmers_filtered = []
+    for i in range(len(matrix)):
+        new_row = [matrix[i][j] for j in range(len(all_kmers)) if j not in cols_to_remove]
+        matrix_filtered.append(new_row)
+
+    all_kmers_filtered = [all_kmers[j] for j in range(len(all_kmers)) if j not in cols_to_remove]
     
     # write files
     output_csv = os.path.join(directory, "feature_matrix_not_normalized.csv")
     with open(output_csv, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        for i, row in enumerate(matrix):
+        for i, row in enumerate(matrix_filtered):
             writer.writerow(row)
     
     out_fnames = os.path.join(directory, "row_fnames.txt")
@@ -59,7 +77,7 @@ def process_directory(directory):
     
     out_columns = os.path.join(directory, "column_kmers.txt")
     with open(out_columns, 'w') as column_kmers_file:
-        for kmer in all_kmers:
+        for kmer in all_kmers_filtered:
             column_kmers_file.write(kmer + "\n")
     
     print("finished making feature matrix (unnormalized")

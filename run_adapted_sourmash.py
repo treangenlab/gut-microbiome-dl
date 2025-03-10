@@ -21,7 +21,7 @@ def parse_args():
 def main():
     args = parse_args()
     for filename in os.listdir(args.input_dir):
-        if filename.endswith(".fasta"):
+        if filename.endswith(".fa"):
             fpath = os.path.join(args.input_dir, filename)
             out_fpath = os.path.join(args.input_dir, f"{os.path.splitext(filename)[0]}.txt")
 
