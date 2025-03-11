@@ -52,8 +52,6 @@ def process_directory(directory):
         if nonzero_count == 1:
             cols_to_remove.append(j)
 
-    print(cols_to_remove)
-
     # remove the singleton columns from the matrix and update all_kmers
     matrix_filtered = []
     all_kmers_filtered = []
