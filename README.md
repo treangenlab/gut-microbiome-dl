@@ -29,11 +29,11 @@ Note that paths in some files will need to be updated based on where you are sto
 
 ## General Workflows:
 ### If you want to train a new version of the model and then analyze the embeddings:
-1. count k-mers and make feature matrix: ```scrpits/feature_matrix_scripts/run_adapted_sourmash.py``` --> ```scripts/feature_matrix_scripts/aggregate_adapted_sourmash_results.py```
-2. train model, save it, load it, and save embeddings: ```model/autoencoder_final.ipynb``` --> ```model/get_embeddings_from_autoencoder.ipynb```
-3. analyze the embeddings: ```scripts/analysis_visualization_scripts/visualize_training_embeddings.py```
+1. count k-mers and make feature matrix: ```run_adapted_sourmash.py``` --> ```aggregate_adapted_sourmash_results.py```
+2. train model, save it, load it, and save embeddings: ```autoencoder_final.ipynb``` --> ```get_embeddings_from_autoencoder.ipynb```
+3. analyze the embeddings: ```visualize_training_embeddings.py```
 
 ### If you want to evaluate the existing model on new data:
-1. count k-mers and make feature matrix: ```scrpits/feature_matrix_scripts/run_adapted_sourmash.py``` --> ```scripts/feature_matrix_scripts/aggregate_adapted_sourmash_results.py``` --> ```scripts/feature_matrix_scripts/prep_eval_feature_matrix.py```
-2. load model and save embeddings: ```model/get_embeddings_from_autoencoder.ipynb```
+1. count k-mers and make feature matrix: ```run_adapted_sourmash.py``` --> ```aggregate_adapted_sourmash_results.py``` --> ```prep_eval_feature_matrix.py```
+2. load model and save embeddings: ```get_embeddings_from_autoencoder.ipynb```
 3. analyze the embeddings: need to write new code for this, unless you are still using the diabimmune dataset, in which case ```visualize_diabimmune_embedding_data.py```
